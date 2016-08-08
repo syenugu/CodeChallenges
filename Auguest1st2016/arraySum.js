@@ -1,11 +1,14 @@
 function summarise(array){
-	var length = array.length;
+	var length = array.length, message = "!Failure: no such element exists";
 	var leftIndex = 0, rightIndex = length - 1, leftSum =0, rightSum = 0;
 
 	for (var index = 2; index < length; index++)
 	{
-		if (leftIndex >= rightIndex)
+		if (leftIndex >= rightIndex || array[rightIndex] < 1 ||  array[leftIndex] < 1)
 		{
+			if(array[rightIndex] < 1 ||  array[leftIndex] < 1){
+				message = "!Failure: cannot have element with less than 1 in the array";
+			}
 			break;
 		}
 
@@ -36,12 +39,10 @@ function summarise(array){
 
 	if (length > 2 && leftSum == rightSum && leftIndex == rightIndex)
 	{
-		return "Success: Index " + (leftIndex + 1) + " satisfies the given conditions.";
+		message =  "Success: element " + (leftIndex + 1) + " satisfies the given conditions.";
 	}
-	else
-	{
-		return "!Failure: no such index exists";
-	}
+	
+	return message;
 }
 
 exports.summarise = summarise;
